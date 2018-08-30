@@ -1,0 +1,18 @@
+	{console.log({books})}
+			{showBooks = books.map((book)=>(
+				<div key={book.id} className={book.id}>
+				<img src={book.imageLinks ? book.imageLinks.thumbnail : noImage}/>
+				<p>{book.id}</p>
+				<p>{book.title}</p>
+				<p>{book.authors ? book.authors.join(', ') : ''}</p>
+				 	<div className="book-shelf-changer">
+                        <select value={book.shelf} onChange={e => onShelfUpdate(book, e.target.value)}>
+                            <option value="move" disabled>Move to...</option>
+                            <option value="currentlyReading">Currently Reading</option>
+                            <option value="wantToRead">Want to Read</option>
+                            <option value="read">Read</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+				</div>
+			))}

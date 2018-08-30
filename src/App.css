@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+
+.category {
+  background-image: url("./images/shelf_background.png");
+  background-repeat: repeat-y;
+  height: 145px;
+  background-position: center; 
+}
+
