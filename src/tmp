@@ -16,3 +16,19 @@
                     </div>
 				</div>
 			))}
+
+
+
+
+
+			  	onShelfUpdate = (book,shelf) => {
+  		console.log(book + "book " + shelf + " shelf")
+  		booksAPI.update(book,shelf).then(
+                this.setState((state) => ({
+                    books: state.books.map(b => {
+                        b.shelf = shelf
+  				 return b
+  					}
+  					)})))
+  		console.log(this.state.books)
+  			}

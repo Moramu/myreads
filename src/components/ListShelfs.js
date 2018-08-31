@@ -13,12 +13,23 @@ class ListShelfs extends Component {
     	})
   	}
 
-  	onShelfUpdate = (book,shelf) => {
 
+
+  	onShelfUpdate = (book,shelf) => {
+  		booksAPI.update(book,shelf).then(
+                this.setState((state) => ({
+                    books: state.books.map(b => {
+                        b.shelf = shelf
+                        //console.log(b)
+  				 return b
+  					})
+                }))
+        )
   	}
 
 	render() {
 		const { books } = this.state
+		const onShelfUpdate = this.onShelfUpdate
     	const shelfs = [
       		{
       			name: 'Read',
@@ -39,9 +50,12 @@ class ListShelfs extends Component {
 			<div className="list-shelfs">
 				{shelfs.map((shelf,index) => (
 					<div key={index} className="shelf">
-					{shelf.name}
+					{/*{console.log({shelf})}	*/}
+					<b>{shelf.name}</b>
 						{<ListBooks 
 							books={shelf.books}
+							shelfs={shelfs.map((shelf) => shelf.name)}
+							onShelfUpdate={onShelfUpdate}
 						/>}
 						
 					</div>

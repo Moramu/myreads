@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 class ListBooks extends Component {
 	render() {
-		const { books } = this.props
+		const { books,shelfs,onShelfUpdate } = this.props
+
 		return(
-			<div className="list-books">
+			<div className="books">
 				{	
 					books.map((book) => (
 						<div key={book.id} className="book">
@@ -12,12 +13,11 @@ class ListBooks extends Component {
 						<p>{book.title}</p>
 						<p>{book.authors ? book.authors.join(', ') : ''}</p>
 							<div className="book-shelf-changer">
-                        		<select>
-                            		<option value="move" disabled>Move to...</option>
-                            		<option value="currentlyReading">Currently Reading</option>
-                            		<option value="wantToRead">Want to Read</option>
-		                            <option value="read">Read</option>
-        		                    <option value="none">None</option>
+                        		<select onChange={e => onShelfUpdate(book.id, e.target.value)}>
+                        			<option value="move" >Move to...</option>
+                        			{shelfs.map((shelf,index) => (
+                        			<option key={index} value={shelf}>{shelf}</option>
+                        			))}
                 		        </select>
                     		</div>
 						</div>
