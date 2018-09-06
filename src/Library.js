@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ListShelfs from './components/ListShelfs'
+import SearchBooks from './components/SearchBooks'
 import * as booksAPI from './utils/BooksAPI' 
+import { Route, Link } from 'react-router-dom'
 
 
 
@@ -42,16 +44,23 @@ class Library extends Component {
         )
     }
 
+
+
 	render() {
 		const { books,shelfs } = this.state
 		const onShelfUpdate = this.onShelfUpdate
 		return (
-			<div className="shelfs">
-			<ListShelfs 
-				books={books}
-				shelfs={shelfs}
-				onShelfUpdate={onShelfUpdate}
+			<div className="library">
+			<Route exact path="/" render={()=>(
+				<ListShelfs 
+					books={books}
+					shelfs={shelfs}
+					onShelfUpdate={onShelfUpdate}
 			/>
+			)}/>
+			<Route exact path="/search" render={()=>(
+				<SearchBooks />
+			)}/>
 			</div>
 		)
 	}
