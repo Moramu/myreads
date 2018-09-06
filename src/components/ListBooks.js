@@ -7,17 +7,18 @@ class ListBooks extends Component {
 		return(
 			<div className="books">
 				{	
-					books.map((book) => (
-						<div key={book.id} className="book">
+					books.map((book,index) => (
+						<div key={index} className="book">
 						<img src={book.imageLinks ? book.imageLinks.thumbnail : 'test'} alt={book.title}/>
 						<p>{book.title}</p>
 						<p>{book.authors ? book.authors.join(', ') : ''}</p>
 							<div className="book-shelf-changer">
-                        		<select onChange={e => onShelfUpdate(book.id, e.target.value)}>
-                        			<option value="move" >Move to...</option>
-                        			{shelfs.map((shelf,index) => (
-                        			<option key={index} value={shelf}>{shelf}</option>
-                        			))}
+                        		<select onChange={e => onShelfUpdate(book, e.target.value)}>
+                        			 <option value="none">Move to...</option>
+				                     <option value="currentlyReading">Currently Reading</option>
+				                     <option value="wantToRead">Want to Read</option>
+				                     <option value="read">Read</option>
+				                     <option value="none">None</option>
                 		        </select>
                     		</div>
 						</div>
