@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class ListBooks extends Component {
 	
@@ -22,7 +23,7 @@ class ListBooks extends Component {
 						<p>{book.authors ? book.authors.join(', ') : ''}</p>
 							<div className="book-shelf-changer">
                         		<select onChange={e => onShelfUpdate(book, e.target.value)}>
-                        			 <option disabled>Move to...</option>
+                        			 <option>Move to...</option>
                         			 {shelfs.map((shelf,index) => (
                         			 	<option key={index} value={shelf.id}>{shelf.name}</option>
                         			 ))}

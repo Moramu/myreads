@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { Route, Link } from 'react-router-dom'
 import ListShelfs from './components/ListShelfs'
 import SearchBooks from './components/SearchBooks'
 import * as booksAPI from './utils/BooksAPI' 
-import { Route, Link } from 'react-router-dom'
+
+
 
 
 
@@ -58,9 +60,15 @@ class Library extends Component {
 					onShelfUpdate={onShelfUpdate}
 			/>
 			)}/>
+
 			<Route exact path="/search" render={()=>(
-				<SearchBooks />
+				<SearchBooks 
+					books={books}
+					shelfs={shelfs}
+					onShelfUpdate={onShelfUpdate}
+				/>
 			)}/>
+
 			</div>
 		)
 	}

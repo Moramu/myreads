@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import ListBooks from './ListBooks'
+import { Route, Link } from 'react-router-dom'
 
 class ListShelfs extends Component {
 
@@ -28,6 +29,7 @@ class ListShelfs extends Component {
         />
         </div>
       ))}
+      <Link className="search-book" to="/search">Search Book</Link>
       </div>
 		)
 	}
