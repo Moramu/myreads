@@ -2,10 +2,115 @@
   text-align: center;
 }
 
-.category {
-  background-image: url("./images/shelf_background.png");
-  background-repeat: repeat-y;
-  height: 145px;
-  background-position: center; 
+.shelf-title {
+	background-color: green;
+	height: 50px;
+	margin-bottom: 30px;
 }
 
+.shelf-title b {
+	font-size: 25px;
+}
+
+.books {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+}
+
+.book {
+	margin: auto auto;
+}
+
+.book-cover {
+	width:30%;
+	margin: auto auto;
+}
+
+.book-image {
+	height: 150px;
+	width: 100px;
+}
+
+.book-details {
+	width: 400px;
+}
+
+.book-shelf-changer {
+  margin-left: 80px;
+  margin-top: -30px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #60ac5d;
+  background-image: url('./images/arrow-drop-down.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.book-shelf-changer select {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.search-book, .back-to-books {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+
+.search-book a {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #2e7d32;
+  background-image: url('./images/add.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  font-size: 0;
+}
+
+.back-to-books {
+  display: block;
+  top: 20px;
+  left: 15px;
+  width: 50px;
+  height: 53px;
+  background: white;
+  background-image: url('./images/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  font-size: 0;
+  border:1px solid #021a40;
+  border-radius: 50%;
+  margin-top: -15px;
+}
+
+.input-search-book input {
+  width: 80%;
+  padding: 15px 10px;
+  font-size: 1.25em;
+  border: 1px solid #021a40;
+  outline: none;
+  border-radius: 30px;
+  margin-bottom: 30px;
+}
+
+.clearQuery {
+ 	width: 60px;
+ 	height: 40px;
+ 	cursor: pointer;
+}
+
+.result {
+	margin-left: auto;
+    margin-right: auto;
+}

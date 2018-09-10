@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import ListShelfs from './components/ListShelfs'
 import SearchBooks from './components/SearchBooks'
 import * as booksAPI from './utils/BooksAPI' 
-
 
 
 
@@ -35,15 +34,16 @@ class Library extends Component {
   	}
 
   	onShelfUpdate = (book,shelf) => {
-    booksAPI.update(book,shelf).then(
-                this.setState((state) => ({
-                    books: state.books.map(b => {
-                        if(b.id === book.id)
-           				b.shelf = shelf;
-           		return b
+  	booksAPI.update(book,shelf).then(
+        this.setState((state) => ({
+            books: state.books.map(b => {
+                if(b.id === book.id)
+                   b.shelf = shelf;
+               return b
             })
-                }))
-        )
+        }))
+    )
+    alert('Book moved to shelf')
     }
 
 
@@ -62,13 +62,8 @@ class Library extends Component {
 			)}/>
 
 			<Route exact path="/search" render={()=>(
-				<SearchBooks 
-					books={books}
-					shelfs={shelfs}
-					onShelfUpdate={onShelfUpdate}
-				/>
+				<SearchBooks />
 			)}/>
-
 			</div>
 		)
 	}

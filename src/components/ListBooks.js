@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import noImg from '../images/no-image-icon.png'
 
 class ListBooks extends Component {
 	
@@ -16,23 +16,27 @@ class ListBooks extends Component {
 		return(
 			<div className="books">
 				{	
-					books.map((book,index) => (
-						<div key={index} className="book">
-						<img src={book.imageLinks ? book.imageLinks.thumbnail : 'test'} alt={book.title}/>
-						<p>{book.title}</p>
-						<p>{book.authors ? book.authors.join(', ') : ''}</p>
-							<div className="book-shelf-changer">
-                        		<select onChange={e => onShelfUpdate(book, e.target.value)}>
-                        			 <option>Move to...</option>
-                        			 {shelfs.map((shelf,index) => (
-                        			 	<option key={index} value={shelf.id}>{shelf.name}</option>
-                        			 ))}
-                		        </select>
-                    		</div>
-						</div>
-						
-						
+					books.length > 0 ? books.map((book,index) => (
+							<div key={index} className="book">
+								<div className="book-cover">
+									<img className="book-image" src={book.imageLinks ? book.imageLinks.thumbnail : noImg} alt={book.title}/>
+									<div className="book-shelf-changer">
+		                        		<select value={book.shelf} onChange={e => onShelfUpdate(book, e.target.value)}>
+		                        			 <option disabled>Move to...</option>
+		                        			 {shelfs.map((shelf,index) => (
+		                        			 	<option key={index} value={shelf.id}>{shelf.name}</option>
+		                        			 ))}
+		                        			 <option value="none">None</option>
+		                		        </select>
+	                    			</div>
+	                    		</div>	
+								<div className="book-details">
+									<p className="book-title">Title: {book.title}</p>
+									<p className="book-authors">Author: {book.authors ? book.authors.join(', ') : ''}</p>
+								</div>
+							</div>
 						))
+					: ( books.length === 0 ? (<p className="result">No query entered</p>) : (<p className="result">No Results Found</p>) )
 				}
 			</div>
 		)
