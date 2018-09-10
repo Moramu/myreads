@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import * as booksAPI from '../utils/BooksAPI' 
-import ListBooks from '../components/ListBooks'
-import clearQueryImg from '../images/clear.png'
+import * as booksAPI from './utils/BooksAPI' 
+import ListBooks from './components/ListBooks'
+import clearQueryImg from './images/clear.png'
 
 class SearchBooks extends Component {
 

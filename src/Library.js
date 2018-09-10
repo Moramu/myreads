@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import ListShelfs from './components/ListShelfs'
-import SearchBooks from './components/SearchBooks'
+import SearchBooks from './SearchBooks'
 import * as booksAPI from './utils/BooksAPI' 
 
 

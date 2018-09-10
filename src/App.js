@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Library from './Library'
-import Search from './components/SearchBooks'
+import Search from './SearchBooks'
 import './App.css';
 import { Switch, Route } from 'react-router-dom'
 
