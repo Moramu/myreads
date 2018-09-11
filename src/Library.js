@@ -10,8 +10,26 @@ import * as booksAPI from './utils/BooksAPI'
 class Library extends Component {
 
 	state = {
-    	books: [],
-      	shelfs: [
+    	books: []
+	}
+
+	componentDidMount() {
+    	booksAPI.getAll().then((books) => {
+      		this.setState({books})
+    	})
+  	}
+
+  onShelfUpdate  = (book, shelf) => {
+  booksAPI.update(book, shelf).then(() => {
+    book.shelf = shelf
+    this.setState(previousState => ({
+      books: previousState.books.filter(b=> b.id !== book.id).concat([book])
+    }))
+    })
+  }
+
+	render() {
+    const shelfs = [
         {
         "id":"read",
         "name":"Read"
@@ -25,31 +43,8 @@ class Library extends Component {
         "name":"Want to Read"
       }
       ]
-	}
 
-	componentDidMount() {
-    	booksAPI.getAll().then((books) => {
-      		this.setState({books})
-    	})
-  	}
-
-  	onShelfUpdate = (book,shelf) => {
-  	booksAPI.update(book,shelf).then(
-        this.setState((state) => ({
-            books: state.books.map(b => {
-                if(b.id === book.id)
-                   b.shelf = shelf;
-               return b
-            })
-        }))
-    )
-    alert('Book moved to shelf')
-    }
-
-
-
-	render() {
-		const { books,shelfs } = this.state
+		const { books } = this.state
 		const onShelfUpdate = this.onShelfUpdate
 		return (
 			<div className="library">

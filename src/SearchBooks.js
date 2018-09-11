@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import {DebounceInput} from 'react-debounce-input'
 import * as booksAPI from './utils/BooksAPI' 
 import ListBooks from './components/ListBooks'
 import clearQueryImg from './images/clear.png'
@@ -42,11 +43,12 @@ class SearchBooks extends Component {
 
 	clearQuery = () => {
 		this.setState({ query:'' })
-		this.setState({searchedBooks:[]})
+		this.setState({ books:[] })
 	} 
 
-    onSearch = (query) => { 
+  onSearch = (query) => { 
     const { myBooks } = this.state
+    if (query) {
     booksAPI.search(query)
     .then(response => {
     	if (response && response.length > 0) {
@@ -55,7 +57,7 @@ class SearchBooks extends Component {
     		myBooks.map((book) => {
     			const updateIndex = searchResults.findIndex(s => s.id === book.id)
     			if (searchResults[updateIndex]) {
-      		  		searchResults[updateIndex].shelf = book.shelf
+      		  	searchResults[updateIndex].shelf = book.shelf   
     			}
     		})
     		this.setState({books: searchResults})
@@ -63,20 +65,19 @@ class SearchBooks extends Component {
           this.setState({ books: [] })
         }
   	})
-  	}
+	} else {
+      this.setState({ books: [] })
+  }
+  }
 
-  	onShelfUpdate = (book,shelf) => {
-  		booksAPI.update(book,shelf).then(
-        this.setState((state) => ({
-            books: state.books.map(b => {
-                if(b.id === book.id)
-                   b.shelf = shelf;
-               return b
-            })
-        }))
-    )
-    alert('Book moved to shelf')
-    }
+  onShelfUpdate  = (book, shelf) => {
+  booksAPI.update(book, shelf).then(() => {
+    book.shelf = shelf
+    this.setState(previousState => ({
+      books: previousState.books.filter(b=> b.id !== book.id).concat([book])
+    }))
+    })
+  }
 
 	render(){
 	const { query,books,shelfs } = this.state
@@ -84,16 +85,15 @@ class SearchBooks extends Component {
 
 		return(
 			<div className="search">
-			{console.log(books)}
 			<Link className="back-to-books" to="/" >Back to My Library</Link>
 				<form className="input-search-book">
-						<input 
-							type="text" 
-							name="name" 
-							placeholder="book"
-							value={query}
-							onChange={(event) => this.updateQuery(event.target.value)}
-							/>
+        <DebounceInput
+              minLength={2}
+              debounceTimeout={300}
+              placeholder="book"
+              value={query}
+              onChange={(event) => this.updateQuery(event.target.value)}
+        />
 							<img className="clearQuery" src={clearQueryImg} alt="cler search" onClick={this.clearQuery}/>
 				</form>
 				<ListBooks 
